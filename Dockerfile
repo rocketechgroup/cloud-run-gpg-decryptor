@@ -27,9 +27,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY decryptor.py .
-COPY file_to_encrypt.txt .
-COPY private.pgp .
-COPY public.pgp .
 
 # Expose the port for the application to run on
 EXPOSE 8080
