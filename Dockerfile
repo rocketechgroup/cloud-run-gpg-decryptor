@@ -23,13 +23,15 @@ USER app
 
 # Copy requirements.txt and install the required Python packages
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m venv venv
+RUN /bin/bash -c "source venv/bin/activate && pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt"
 
 # Copy the application code
 COPY decryptor.py .
+COPY gunicorn_config.py .
 
-# Expose the port for the application to run on
-EXPOSE 8080
+# Expose the port the app runs on
+EXPOSE 8000
 
-# Define the command to run the application
-CMD ["python", "decryptor.py"]
+# Start Gunicorn with the app module
+CMD ["/home/app/venv/bin/gunicorn", "--config", "gunicorn_config.py", "decryptor:app"]

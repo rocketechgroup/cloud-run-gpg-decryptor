@@ -2,6 +2,8 @@ import csv
 import io
 import os
 import gnupg
+import random
+import string
 
 from datetime import datetime
 from google.cloud import secretmanager_v1
@@ -46,18 +48,15 @@ def upload_stringio_to_gcs(bucket_name, destination_blob_name, string_data):
 
 
 def generate_in_memory_csv():
-    # Sample data in a list of dictionaries
-    data = [
-        {"name": "Alice", "age": 30, "city": "New York"},
-        {"name": "Bob", "age": 25, "city": "San Francisco"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"},
-        {"name": "Charlie", "age": 35, "city": "Los Angeles"}
-    ]
+    def random_string(length):
+        return ''.join(random.choice(string.ascii_letters) for _ in range(length))
+
+    long_dict = {f"key{i}": random_string(10) for i in range(1, 51)}
+
+    data = []
+
+    for i in range(10000):
+        data.append(long_dict)
 
     # Create a StringIO object to hold the CSV data
     csv_string_io = io.StringIO()
@@ -94,10 +93,12 @@ if __name__ == '__main__':
     if not encrypted_ascii_data:
         raise RuntimeError('cannot encrypt data, encrypted data is empty')
 
+    now = datetime.now()
+    timestamp_date = now.strftime("%Y-%m-%d")
     timestamp_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     bucket_name = f'{PROJECT_ID}-demo-gpg-encrypted'
-    destination_blob_name = f"gpg_demo_encrypted_{timestamp_str}.csv.gpg"
+    destination_blob_name = f"{timestamp_date}/gpg_demo_encrypted_{timestamp_str}.csv.gpg"
 
     upload_stringio_to_gcs(
         bucket_name=bucket_name,

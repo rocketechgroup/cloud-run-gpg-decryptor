@@ -1,0 +1,16 @@
+{
+  "message": {
+    "attributes": {
+      "bucketId": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted",
+      "eventTime": "2023-04-09T22:02:55.583831Z",
+      "eventType": "OBJECT_FINALIZE",
+      "notificationConfig": "projects/_/buckets/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/notificationConfigs/1",
+      "objectGeneration": "1681077775576165",
+      "objectId": "gpg_demo_encrypted_2023-04-09_23-02-54.csv.gpg",
+      "payloadFormat": "JSON_API_V1"
+    },
+    "data": "ewogICJraW5kIjogInN0b3JhZ2Ujb2JqZWN0IiwKICAiaWQiOiAicm9ja2V0ZWNoLWRlLXBnY3Atc2FuZGJveC1kZW1vLWdwZy1lbmNyeXB0ZWQvZ3BnX2RlbW9fZW5jcnlwdGVkXzIwMjMtMDQtMDlfMjMtMDQtNTguY3N2LmdwZy8xNjgxMDc3ODk5MDYwNTI3IiwKICAic2VsZkxpbmsiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlYXBpcy5jb20vc3RvcmFnZS92MS9iL3JvY2tldGVjaC1kZS1wZ2NwLXNhbmRib3gtZGVtby1ncGctZW5jcnlwdGVkL28vZ3BnX2RlbW9fZW5jcnlwdGVkXzIwMjMtMDQtMDlfMjMtMDQtNTguY3N2LmdwZyIsCiAgIm5hbWUiOiAiZ3BnX2RlbW9fZW5jcnlwdGVkXzIwMjMtMDQtMDlfMjMtMDQtNTguY3N2LmdwZyIsCiAgImJ1Y2tldCI6ICJyb2NrZXRlY2gtZGUtcGdjcC1zYW5kYm94LWRlbW8tZ3BnLWVuY3J5cHRlZCIsCiAgImdlbmVyYXRpb24iOiAiMTY4MTA3Nzg5OTA2MDUyNyIsCiAgIm1ldGFnZW5lcmF0aW9uIjogIjEiLAogICJjb250ZW50VHlwZSI6ICJhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0iLAogICJ0aW1lQ3JlYXRlZCI6ICIyMDIzLTA0LTA5VDIyOjA0OjU5LjA2OVoiLAogICJ1cGRhdGVkIjogIjIwMjMtMDQtMDlUMjI6MDQ6NTkuMDY5WiIsCiAgInN0b3JhZ2VDbGFzcyI6ICJTVEFOREFSRCIsCiAgInRpbWVTdG9yYWdlQ2xhc3NVcGRhdGVkIjogIjIwMjMtMDQtMDlUMjI6MDQ6NTkuMDY5WiIsCiAgInNpemUiOiAiMzkzMDkiLAogICJtZDVIYXNoIjogInJLZlI2WlIrVW1aV3J5Tkt1RGxNZWc9PSIsCiAgIm1lZGlhTGluayI6ICJodHRwczovL3N0b3JhZ2UuZ29vZ2xlYXBpcy5jb20vZG93bmxvYWQvc3RvcmFnZS92MS9iL3JvY2tldGVjaC1kZS1wZ2NwLXNhbmRib3gtZGVtby1ncGctZW5jcnlwdGVkL28vZ3BnX2RlbW9fZW5jcnlwdGVkXzIwMjMtMDQtMDlfMjMtMDQtNTguY3N2LmdwZz9nZW5lcmF0aW9uPTE2ODEwNzc4OTkwNjA1MjcmYWx0PW1lZGlhIiwKICAiY3JjMzJjIjogIlR4UUFFdz09IiwKICAiZXRhZyI6ICJDSy9Lalpqbm5mNENFQUU9Igp9",
+    "messageId": "7433198096736556"
+  },
+  "subscription_name": "projects/630458277802/subscriptions/demo-gpg-bigquery"
+}

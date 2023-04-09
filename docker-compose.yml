@@ -2,12 +2,17 @@ version: "3.8"
 services:
   cloud-run-gpg-decryptor:
     build: .
+    ports:
+      - "8081:8000"
     dns:
       - 8.8.8.8
       - 8.8.4.4
     environment:
       - PROJECT_ID=rocketech-de-pgcp-sandbox
       - PRIVATE_KEY_SECRET_ID=demo-gpg-private-key
+      - GPG_KEY_FINGERPRINTS=71FEDB8B44D15B1AF199797A939B462CCE5D8DB8
+      - GPG_RECIPIENT=no-passwd@example.com
+      - DESTINATION_BUCKET_NAME=rocketech-de-pgcp-sandbox-demo-gpg-decrypted
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/gcp_credentials.json
     volumes:
       - ~/.config/gcloud/application_default_credentials.json:/app/credentials/gcp_credentials.json

@@ -6,7 +6,6 @@ import os
 
 from datetime import datetime
 from flask import Flask, request
-from google.cloud import pubsub_v1
 from google.cloud import secretmanager_v1
 from google.cloud import storage
 
@@ -74,40 +73,45 @@ def decrypt_from_gcs(bucket_name, source_blob_name):
     return decrypted_data
 
 
-# app = Flask(__name__)
+app = Flask(__name__)
+# Initialize the GnuPG instance
+gpg = gnupg.GPG()
+# get private key from secret manager
+private_key = access_secret_version(project_id=PROJECT_ID, secret_id=PRIVATE_KEY_SECRET_ID, version_id=1)
+gpg.import_keys(key_data=private_key)
+# trusting imported key is important, or it will return an empty string as encrypted data
+gpg.trust_keys(fingerprints=os.environ.get('GPG_KEY_FINGERPRINTS'), trustlevel='TRUST_ULTIMATE')
+# set recipient which is required to decrypt
+recipient = os.environ.get('GPG_RECIPIENT')
 
 
-# @app.route('/push-handlers/receive_messages', methods=['POST'])
-# def pubsub_push():
-#     envelope = json.loads(request.data.decode('utf-8'))
-#     payload = base64.b64decode(envelope['message']['data'])
-#
-#     print(payload)
-#
-#     return 'OK', 200
+@app.route('/push-handlers/receive_messages', methods=['POST'])
+def pubsub_push():
+    envelope = json.loads(request.data.decode('utf-8'))
+    event_type = envelope['message']['attributes']['eventType']
+    if event_type != 'OBJECT_FINALIZE':
+        return 'Is not object finalise event, ignore', 204
 
-if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=8080, debug=True)
-
-    # Initialize the GnuPG instance
-    gpg = gnupg.GPG()
-    # get private key from secret manager
-    private_key = access_secret_version(project_id=PROJECT_ID, secret_id=PRIVATE_KEY_SECRET_ID, version_id=1)
-    gpg.import_keys(key_data=private_key)
-    # trusting imported key is important, or it will return an empty string as encrypted data
-    gpg.trust_keys(fingerprints='71FEDB8B44D15B1AF199797A939B462CCE5D8DB8', trustlevel='TRUST_ULTIMATE')
-    recipient = 'no-passwd@example.com'
-
-    source_bucket_name = f'{PROJECT_ID}-demo-gpg-encrypted'
-    source_blob_name = "gpg_demo_encrypted_2023-04-09_22-16-30.csv.gpg"
+    payload = json.loads(base64.b64decode(envelope['message']['data']))
+    source_bucket_name = payload['bucket']
+    source_blob_name = payload['name']
 
     decrypted_data = decrypt_from_gcs(source_bucket_name, source_blob_name)
 
     if not decrypted_data:
-        raise RuntimeError('Cannot decrypt data...')
+        raise RuntimeError('Cannot decrypt data...')  # consider implement a dead letter queue for this
 
+    now = datetime.now()
+    timestamp_date = now.strftime("%Y-%m-%d")
     timestamp_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    destination_bucket_name = f'{PROJECT_ID}-demo-gpg-decrypted'
-    destination_blob_name = f"gpg_demo_decrypted_{timestamp_str}.csv"
+    destination_bucket_name = os.environ.get('DESTINATION_BUCKET_NAME')
+    destination_blob_name, _ = os.path.splitext(source_blob_name)
+    destination_blob_name_with_timestamp = f"{timestamp_date}/{destination_blob_name}_{timestamp_str}.csv"
 
-    upload_stringio_to_gcs(destination_bucket_name, destination_blob_name, str(decrypted_data))
+    upload_stringio_to_gcs(destination_bucket_name, destination_blob_name_with_timestamp, str(decrypted_data))
+
+    return 'OK', 200
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
