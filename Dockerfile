@@ -31,7 +31,7 @@ COPY decryptor.py .
 COPY gunicorn_config.py .
 
 # Expose the port the app runs on
-EXPOSE 8000
+EXPOSE 8080
 
 # Start Gunicorn with the app module
 CMD ["/home/app/venv/bin/gunicorn", "--config", "gunicorn_config.py", "decryptor:app"]

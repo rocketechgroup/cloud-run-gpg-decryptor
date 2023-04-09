@@ -1,0 +1,27 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'europe-west2-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_COMMIT_SHA}', '.' ]
+
+  # Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'europe-west2-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_COMMIT_SHA}' ]
+
+  # Deploy as a cloud run service
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'gpg-decryptor'
+      - '--image=europe-west2-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_COMMIT_SHA}'
+      - '--platform=managed'
+      - '--region=${_REGION}'
+      - '--no-allow-unauthenticated'
+      - '--ingress=internal'
+      - '--service-account=${_SA}'
+      - '--set-env-vars=PROJECT_ID=${_PROJECT_ID}'
+      - '--set-env-vars=PRIVATE_KEY_SECRET_ID=${_PRIVATE_KEY_SECRET_ID}'
+      - '--set-env-vars=GPG_KEY_FINGERPRINTS=${_GPG_KEY_FINGERPRINTS}'
+      - '--set-env-vars=GPG_RECIPIENT=${_GPG_RECIPIENT}'
+      - '--set-env-vars=DESTINATION_BUCKET_NAME=${_DESTINATION_BUCKET_NAME}'
