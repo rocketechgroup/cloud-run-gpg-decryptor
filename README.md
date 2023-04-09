@@ -1,3 +1,3 @@
-# cloud-run-pgp-decryptor
+# cloud-run-gpg-decryptor
 
-A pgp decryptor service runs on cloud run to decrypt files from GCS as they land via the event triggered to PubSub
+A gpg decryptor service runs on cloud run to decrypt files from GCS as they land via the event triggered to PubSub
