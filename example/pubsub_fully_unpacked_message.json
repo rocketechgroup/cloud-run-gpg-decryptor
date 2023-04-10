@@ -12,7 +12,7 @@
     "data": {
       "kind": "storage#object",
       "id": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg/1681077899060527",
-      "selfLink": "https://www.googleapis.com/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg",
+      "selfLink": "https://www.googleapis.com/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/2023-04-09/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg",
       "name": "gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg",
       "bucket": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted",
       "generation": "1681077899060527",
@@ -24,7 +24,7 @@
       "timeStorageClassUpdated": "2023-04-09T22:04:59.069Z",
       "size": "39309",
       "md5Hash": "rKfR6ZR+UmZWryNKuDlMeg==",
-      "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg?generation=1681077899060527&alt=media",
+      "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/2023-04-09/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg?generation=1681077899060527&alt=media",
       "crc32c": "TxQAEw==",
       "etag": "CK/KjZjnnf4CEAE="
     },
