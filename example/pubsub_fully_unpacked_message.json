@@ -1,0 +1,34 @@
+{
+  "message": {
+    "attributes": {
+      "bucketId": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted",
+      "eventTime": "2023-04-09T22:02:55.583831Z",
+      "eventType": "OBJECT_FINALIZE",
+      "notificationConfig": "projects/_/buckets/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/notificationConfigs/1",
+      "objectGeneration": "1681077775576165",
+      "objectId": "gpg_demo_encrypted_2023-04-09_23-02-54.csv.gpg",
+      "payloadFormat": "JSON_API_V1"
+    },
+    "data": {
+      "kind": "storage#object",
+      "id": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg/1681077899060527",
+      "selfLink": "https://www.googleapis.com/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg",
+      "name": "gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg",
+      "bucket": "rocketech-de-pgcp-sandbox-demo-gpg-encrypted",
+      "generation": "1681077899060527",
+      "metageneration": "1",
+      "contentType": "application/octet-stream",
+      "timeCreated": "2023-04-09T22:04:59.069Z",
+      "updated": "2023-04-09T22:04:59.069Z",
+      "storageClass": "STANDARD",
+      "timeStorageClassUpdated": "2023-04-09T22:04:59.069Z",
+      "size": "39309",
+      "md5Hash": "rKfR6ZR+UmZWryNKuDlMeg==",
+      "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/rocketech-de-pgcp-sandbox-demo-gpg-encrypted/o/gpg_demo_encrypted_2023-04-09_23-04-58.csv.gpg?generation=1681077899060527&alt=media",
+      "crc32c": "TxQAEw==",
+      "etag": "CK/KjZjnnf4CEAE="
+    },
+    "messageId": "7433198096736556"
+  },
+  "subscription_name": "projects/630458277802/subscriptions/demo-gpg-bigquery"
+}
