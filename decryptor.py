@@ -13,8 +13,8 @@ PROJECT_ID = os.environ.get('PROJECT_ID')
 PRIVATE_KEY_SECRET_ID = os.environ.get('PRIVATE_KEY_SECRET_ID')
 
 
-# docs: https://gnupg.readthedocs.io/en/latest/
-# docs: https://gist.github.com/johnfedoruk/7f156d844af54cc91324dff4f54b11ce
+# GPG docs: https://gnupg.readthedocs.io/en/latest/
+# How to export keys: https://unix.stackexchange.com/questions/481939/how-to-export-a-gpg-private-key-and-public-key-to-a-file
 
 def access_secret_version(project_id, secret_id, version_id):
     # Create the Secret Manager client
