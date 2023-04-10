@@ -102,11 +102,10 @@ def pubsub_push():
         raise RuntimeError('Cannot decrypt data...')  # consider implement a dead letter queue for this
 
     now = datetime.now()
-    timestamp_date = now.strftime("%Y-%m-%d")
     timestamp_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     destination_bucket_name = os.environ.get('DESTINATION_BUCKET_NAME')
     destination_blob_name, _ = os.path.splitext(source_blob_name)
-    destination_blob_name_with_timestamp = f"{timestamp_date}/{destination_blob_name}_{timestamp_str}.csv"
+    destination_blob_name_with_timestamp = f"{destination_blob_name}_{timestamp_str}.csv"
 
     upload_stringio_to_gcs(destination_bucket_name, destination_blob_name_with_timestamp, str(decrypted_data))
 
