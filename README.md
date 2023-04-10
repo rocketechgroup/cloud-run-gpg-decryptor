@@ -10,6 +10,16 @@ This solution is a serverless solution and keys need to be exported from GPG key
 See the comprehensive guide from [johnfedoruk](https://gist.github.com/johnfedoruk/7f156d844af54cc91324dff4f54b11ce) on
 how to generate and export keys from GPG
 
+One thing isn't covered in this article is how to export a private key, which you can do as below
+```
+gpg --output private.pgp --armor --export-secret-key username@email
+```
+
+And for exporting public key, you can do
+```
+gpg --output public.pgp --armor --export username@email
+```
+
 ### The recipient
 
 GPG works based on the association of a key to a recipient, which is typically an email address used when generating the key. 
